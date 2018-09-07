@@ -5,9 +5,9 @@
   },
   "mongoose": {
     "uri": "mongodb://pozbeeAdmin@138.68.17.213:27017/pozbee"
-  },
+  },  
   "default": {
-    "api": {
+    "api": {  
       "version" : "v1"
     },
     "user": {

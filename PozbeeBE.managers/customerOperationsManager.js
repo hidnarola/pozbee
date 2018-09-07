@@ -761,7 +761,8 @@
                                     return sr._id.toString() == include.toString()
                                 });
                                 if (!includingScheduledReq) {
-                                    database.ScheduledRequest.findOne({_id: include}).populate("categoryId").populate("userId").exec(function (err, scheduledRequest) {
+                                    database.ScheduledRequest.findOne({_id: include}).populate("categoryId").populate("photographerId").exec(function (err, scheduledRequest) {
+                                        console.log('ScheduleRequest============>',scheduledRequest);
                                         if (err || !scheduledRequest) {
                                             callback();
                                         } else {
@@ -780,21 +781,26 @@
                             async.each(results, function(scheduledRequest, eachCb){
                                 var sr = scheduledRequest.toObject();
                                 async.series([function(cb){
-                                    photographerOperationsManager.getPhotographerUserId(scheduledRequest.photographerId, function(err, photographerUserId){
-                                      if(err){
-                                          cb(err);
-                                      }  else{
-                                          database.User.findOne({_id : scheduledRequest.userId}).exec(function(err, userResult){
-                                              if(err){
-                                                  cb(err);
-                                              }else{
-                                                  sr.userName = userResult.name;
-                                                  sr.userEmail = userResult.email;
-                                                  sr.userPhoneNumber = userResult.phoneNumber;
-                                                  sr.userPictureUri = userResult.profilePicture;
-                                                  cb();
-                                              }
-                                          });
+                                   
+                                    database.Photographer.findOne({_id : scheduledRequest.photographerId}).exec(function(err, photographerResult){
+                                        console.log('photogrpher data========>',photographerResult);
+                                        if(err){
+                                            cb(err);
+                                        }else{
+                                            sr.photographerApplication = mongoose.Types.ObjectId(photographerResult.photographerApplication);
+                                            database.User.findOne({"photographerApplications":{$elemMatch:{$eq:sr.photographerApplication}}}).exec(function(err,userResult){
+                                                console.log('photographerapplication Data====>',err,userResult.name);
+                                                if(err){
+                                                    cb(err);
+                                                }else{
+                                                    sr.userName = userResult.name;
+                                                    sr.userEmail = userResult.email;
+                                                    sr.userPhoneNumber = userResult.phoneNumber;
+                                                    sr.userPictureUri = userResult.profilePicture;
+                                                    cb();
+                                                }
+                                            });
+                                            
                                       }
                                     });
                                     },function(cb){
