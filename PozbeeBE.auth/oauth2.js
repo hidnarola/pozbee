@@ -24,11 +24,13 @@
     };
 
     aserver.serializeClient(function(client, callback) {
+        console.log('serialzed===========');
         return callback(null, client._id);
     });
 
 // Register deserialization function
     aserver.deserializeClient(function(id, callback) {
+        console.log('Deserialzed===========');
         Client.findOne({ _id: id }, function (err, client) {
             if (err) { return callback(err); }
             return callback(null, client);
@@ -36,7 +38,7 @@
     });
 // Destroys any old tokens and generates a new access and refresh token
     var generateTokens = function (data, user, done) {
-
+        console.log('genereate token===========');
         // curries in `done` callback so we don't need to pass it
         var errorHandler = errFn.bind(undefined, done),
             refreshToken,
@@ -73,7 +75,7 @@
 // Exchange username & password for access token.
     aserver.exchange(oauth2orize.exchange.password(function(params, username, password, scope, done) {
         console.log('in exchange cleint================>');
-        Client.findOne({clientId : params.client.clientId}).exec(function(err, client){
+        Client.findOne({clientId : params.clientId}).exec(function(err, client){
             if(err || !client){
                 var err = new oauth2orize.TokenError(
                     'client not found'
@@ -121,7 +123,7 @@
 
                             var model = {
                                 userId: user._id,
-                                clientId: params.client.clientId,
+                                clientId: params.clientId,
                                 deviceId : params.deviceId
                             };
 
@@ -142,7 +144,7 @@
 
                     var model = {
                         userId: user._id,
-                        clientId: params.client.clientId,
+                        clientId: params.clientId,
                         deviceId : params.deviceId
                     };
 
