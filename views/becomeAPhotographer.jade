@@ -1,0 +1,140 @@
+doctype html
+html
+    head
+        title Dashboard :: Register
+        meta( name='viewport', content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet', href='//cdn.kendostatic.com/2013.3.1119/styles/kendo.common.min.css')
+        link(rel='stylesheet', href='//cdn.kendostatic.com/2013.3.1119/styles/kendo.bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/site.css')
+    body
+        .login.well
+            div.header-image-container
+                div.header-image-image
+                    div.header-image-sizer
+            h1  Become a Pozbee Photographer!
+            hr
+                form(id='register-form', method='POST', action='/api/photographer/becomeaphotographer' novalidate)
+            .form-group
+                label(for='name') Name
+                input(type='text', name='display', class='form-control',
+                id='name', placeholder='Enter name',
+                required, data-required-msg='Name is required')
+            .form-group
+                label(for='email') E-mail
+                input(type='text', name='email', class='form-control',
+                id='email', placeholder='Enter e-mail',
+                required, data-required-msg='Username is required')
+            .form-group
+                label(for='zip-code') Zip Code
+                input(type='text', name='zip-code', class='form-control',
+                id='zip-code', placeholder='Enter Zip-Code'
+                        required, data-required-msg='Zip-Code is required')
+            .form-group
+                label(for='phone-number') Phone Number
+                input(type='text', name='phone-number', class='form-control',
+                id='phone-number', placeholder=''
+                        required, data-required-msg="Please confirm your password")
+            .form-group
+                label(for='specialization') What is your specialization?
+                br
+                span You can choose more than one
+                ul.list-group
+                    li
+                        label
+                            span
+                                input(type="checkbox", name="specialization" value="Portait")
+                            span Portrait
+                    li
+                        label
+                            span
+                                input(type="checkbox", name="specialization" value="Wedding")
+                            span Wedding
+                    li
+                        label
+                            span
+                                input(type="checkbox", name="specialization" value="Headshot")
+                            span Headshot
+                    li
+                        label
+                            span
+                                input(type="checkbox", name="specialization" value="Model Shoot")
+                            span Model Shoot
+                    li
+                        label
+                            span
+                                input(type="checkbox", name="specialization" value="Party")
+                            span Party
+            .form-group
+                label(for='camera') What camera do you have?
+                input(type='text', name='camera', class='form-control',
+                id='camera', placeholder='',
+                required data-required-msg='Please confirm your email address')
+            .form-group
+                label(for='retouch') Are you able to retouch photos?
+                ul.list-group
+                    li
+                        label
+                            span
+                                input(type="radio", name="retouch" value="true")
+                            span Yes
+                    li
+                        label
+                            span
+                                input(type="radio", name="retouch" value="false")
+                            span No
+            .form-group
+                label(for='camera') What is your minimum hourly rate?
+                input(type='text', name='rate', class='form-control',
+                id='rate', placeholder='')
+            .form-group
+                label(for='website') Your Website
+                br
+                span Personal website, Linkedin or Instagram
+                input(type='text', name='website', class='form-control',
+                id='website', placeholder='')
+            .form-group
+                label(for='phoneModel') Which phone do you have?
+                br
+                span Including model like iPhone 5S, iPhone 6 plus
+                input(type='text', name='phoneModel', class='form-control',
+                id='phoneModel', placeholder='')
+            .form-group
+                button.btn.btn-default Send
+                    script(src='//code.jquery.com/jquery-1.9.1.min.js')
+    script(src='//cdn.kendostatic.com/2013.3.1119/js/kendo.all.min.js')
+    script.
+        $(function () {
+            // cache references to input controls
+            var password = $('#password');
+            var confirmPassword = $('#confirm-password');
+            var email = $('#email');
+            var confirmEmail = $('#confirm-email');
+            $("#register-form").kendoValidator({
+                rules: {
+                    passwordMatch: function (input) {
+                        // passwords must match
+                        if (input.is('#confirm-password')) {
+                            return $.trim(password.val()) === $.trim(confirmPassword.val());
+                        }
+                        return true;
+                    },
+                    emailMatch: function (input) {
+                        // email addresses must match
+                        if (input.is('#confirm-email')) {
+                            return $.trim(email.val()) === $.trim(confirmEmail.val());
+                        }
+                        return true;
+                    }
+                },
+                messages: {
+                    // custom error messages. email gets picked up
+                    // automatically for any inputs of that type
+                    passwordMatch: 'The passwords don\'t match',
+                    emailMatch: 'The email addresses don\'t match',
+                    email: 'That doesn\'t appear to be a valid email address'
+                }
+            }).data('kendoValidator');
+        });
+                        

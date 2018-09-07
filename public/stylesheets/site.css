@@ -1,0 +1,109 @@
+.form-container{
+    border-radius: 2px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    margin: 0.75rem auto;
+    padding: 0;
+    max-width: 700px;
+    min-width: 280px;
+    width: 100%;
+}
+
+.header-image-container{
+    height: auto;
+    text-align: left;
+    font-size: 0;
+    line-height: 0;
+}
+
+.header-image-image{
+    background-image: url(https://lh4.googleusercontent.com/W14O5tWSrscYyYxdS-pxvlfxJ13dLY6mg4nEO-cdRmyDoFkvleUhMfrTllV-Z5r-OlFdjlEaSw=w960);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: inline-block;
+    width: 100%;
+}
+.header-image-sizer{
+    height: 0;
+    width: 100%;
+    padding-top:25%
+}
+
+.top-of-page{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 4rem;
+    margin-bottom: 3rem
+}
+
+.form-title{
+    font-family: "Roboto Condensed";
+    color: rgb(96,125,139);
+    font-weight: 400;
+    font-size: 2.460rem;
+    font-style: normal;
+    text-align: center;
+    margin: 0 0 .5rem;
+}
+
+.form{
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.required-asterisk{
+    font-family: "Roboto";
+    color: rgb(196,59,29);
+    font-weight: 400;
+    font-size: 1.000rem;
+    font-style: normal;
+}
+.question-list{
+    list-style-type: none;
+}
+.item{
+    font-size: 1.080rem;
+    margin : 12px 0;
+}
+.form-entry{
+    margin-bottom:1.5em;
+}
+.q-title {
+    font-family: "Roboto";
+    color: rgb(96, 125, 139);
+    font-weight: 700;
+    font-size: 1.080rem;
+    font-style: normal;
+}
+.form-entry-input{
+    vertical-align: middle;
+    margin-left: 0;
+    margin-top: 0;
+}
+.q-short{
+    border: 1px solid #bbb;
+    padding: 0.4em 0.6em;
+}
+
+.form-group label{
+    font-size:15px;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+    font-size: 16px;
+}

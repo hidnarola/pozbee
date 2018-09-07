@@ -1,0 +1,27 @@
+{
+  "port": 1337,
+  "security": {
+    "tokenLife" : 86400
+  },
+  "mongoose": {
+    "uri": "mongodb://pozbeeAdmin@138.68.17.213:27017/pozbee"
+  },
+  "default": {
+    "api": {
+      "version" : "v1"
+    },
+    "user": {
+      "username": "myapi",
+      "password": "abc1234"
+    },
+    "client": {
+      "name": "Android API v1",
+      "clientId": "android",
+      "clientSecret": "SomeRandomCharsAndNumbers"
+    }
+  },
+  "app":{
+    "maxDistance" : 27,
+    "minCustomerLimit" : 50
+  }
+}

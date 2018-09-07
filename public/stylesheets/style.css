@@ -1,0 +1,18 @@
+body {
+  font-family: "Roboto";
+  color: rgb(100,100,100);
+  font-weight: 400;
+  font-size: 1.080rem;
+  font-style: normal;
+  word-wrap:break-word;
+}
+div{
+  display: block;
+}
+form{
+  display : block;
+  margin-top : 0em;
+}
+a {
+  color: #00B7FF;
+}
