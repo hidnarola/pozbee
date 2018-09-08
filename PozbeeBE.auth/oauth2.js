@@ -76,7 +76,7 @@
     aserver.exchange(oauth2orize.exchange.password(function(params, username, password, scope, done) {
         console.log('in exchange cleint================>',params);
         Client.findOne({clientId : params.clientId}).exec(function(err, client){
-            console.log("Client => ",client);
+            console.log("Client => ", err, client);
             if(err || !client){
                 var err = new oauth2orize.TokenError(
                     'client not found'
