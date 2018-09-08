@@ -74,8 +74,9 @@
 
 // Exchange username & password for access token.
     aserver.exchange(oauth2orize.exchange.password(function(params, username, password, scope, done) {
-        console.log('in exchange cleint================>');
+        console.log('in exchange cleint================>',params);
         Client.findOne({clientId : params.clientId}).exec(function(err, client){
+            console.log("Client => ",client);
             if(err || !client){
                 var err = new oauth2orize.TokenError(
                     'client not found'
@@ -85,6 +86,7 @@
             var phoneNumber = params.phoneNumber;
             var activationCode = params.activationCode;
             User.findOne({phoneNumber : phoneNumber}).populate("phoneActivation").populate("socialUser").populate("photographerApplications").populate("photographer").exec(function(err,user) {
+                console.log("User => ",user);
                 if (err) {
                     var err = new oauth2orize.TokenError(
                         'Invalid scope: you provided an empty set of scopes',
@@ -101,6 +103,7 @@
                     return done(false);
                 }
                 var usr = user.toObject();
+                console.log("usr => ",usr);
                 if (usr.photographer){
                     Portfolio.find({photographerId : usr.photographer._id}).exec(function(err,portfolioResult){
                         if(err){

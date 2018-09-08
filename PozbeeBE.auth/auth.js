@@ -12,21 +12,27 @@
 
     passport.use(new BasicStrategy({passReqToCallback: true},
         function(req, username, password, done) {
+            console.log('initial====>',req.body);
             console.log('basic stratergy================>');
             Client.findOne({ clientId: username }, function(err, client) {
+                console.log('client=======>',client, err);
+
                 if (err) {
+                    console.log('err=>',err);
                     return done(err);
                 }
 
                 if (!client) {
+                    console.log('not client=========>',client);
                     return done(null, false);
                 }
 
                 if (client.clientSecret !== password) {
+                    console.log('not client=========>',client);
                     return done(null, false);
                 }
-
-                return done(null, client);
+                console.log('req body===>',req.body);
+                return done(null, req.body);
             });
         }
     ));
@@ -67,17 +73,16 @@
                     return done(null, false);
                 }
 
-                // && Math.round((Date.now()-token.created)/1000) < 90000000 
-                // if(token.userId) {
+                if(token.userId && Math.round((Date.now()-token.created)/1000) > 1000000 ) {
 
-                //     AccessToken.remove({ token: accessToken }, function (err) {
-                //         if (err) {
-                //             return done(err);
-                //         }
-                //     });
+                    AccessToken.remove({ token: accessToken }, function (err) {
+                        if (err) {
+                            return done(err);
+                        }
+                    });
 
-                //     return done(null, false, { message: 'Token expired' });
-                // }
+                    return done(null, false, { message: 'Token expired' });
+                }
                 if(token.userId) {
                     User.findById(token.userId, function (err, user) {
 
