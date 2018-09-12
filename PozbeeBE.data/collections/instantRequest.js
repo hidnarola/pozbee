@@ -1,4 +1,5 @@
 (function(instantRequest){
+    
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         photographerRequestSchema = new Schema({
