@@ -30,6 +30,8 @@
     }
 
     customerOperations.findPhotographersForInstant = function(userId, location, categoryId, photographStyle, next){
+        console.log('userId==>',userId);
+        console.log('categoryID=====>',categoryId,'location=====>',location,'photographStyle=====>',photographStyle);
         async.waterfall([
             function(cb){
                 database.User.findOne({_id : userId}).populate("photographer").exec(function(err,userResult){
@@ -138,7 +140,7 @@
                             styles : { $in : [photographStyle]}
                         }
                     },
-                    isOnline : true
+                    isOnline : true 
                 }).exec(function(err,photographers){
                     var photographerIds = _.map(photographers,function(photographer){ return photographer._id; })
                     customerOperations.sortPhotographersByTheirAcceptence(photographerIds,null, function(err,photographerStatistics){
@@ -188,6 +190,7 @@
             }
         })
     }
+
 
     customerOperations.checkInstantRequestStatus = function(instantRequestId, next){
         database.InstantRequest.findOne({_id : mongoose.Types.ObjectId(instantRequestId)}).exec(function(err,instantRequest){

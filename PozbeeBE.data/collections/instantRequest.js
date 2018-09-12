@@ -124,6 +124,7 @@
         photographerRequestSchema.pre("validate", function(next){
             if (!this.isAnswered) { this.isAnswered = false; }
             if (!this.isTaken) { this.isTaken = false; }
+            next();
         })
         instantRequestSchema.pre("validate", function(next){
             if(!this.requestDate){ this.requestDate = new Date(); }
